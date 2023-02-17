@@ -18,14 +18,23 @@
 body {
   /* Fixing the weird white space */
   margin: 0;
-  font-size: 1.5em;
+  font-size: 40px;
   font-family:  'Pixel Mini', Helvetica, sans-serif;
 }
 
 h1 {
   text-align: center;
-  font-size: 3em;
-  font-family:  'Lunaria', Helvetica, sans-serif;
+  box-sizing: border-box;
+  image-rendering: crisp-edges;
+  background-image: url(images/Label.png);
+  background-repeat: no-repeat;
+  background-size: 512px auto;
+  background-position: center;
+  font-size: 36px;
+  height: 128px;
+  padding-top: 64px;
+  color: #543a54;
+  font-family: 'Lunaria', Helvetica, sans-serif;
 }
 
 p {
@@ -36,20 +45,24 @@ p {
 section, header, footer {
   background-color: #00152d;
   color: #e5f5f6;
-  height: 100vh;
+}
+
+section, header {
+  min-height: 100vh;
 }
 
 section {
-  padding: 5% 5%;
+  padding: 64px;
 }
 
 header {
-  background-image: url("images/Background.png");
+  background-image: url("images/Background.png"), linear-gradient(#543a54 0%, #543a54 50%, #2cb299 50%);
+  image-rendering: crisp-edges;
   background-repeat: repeat-x;
-  background-position: top center;
-  background-size: 100vw auto;
+  background-position: center center;
+  background-size: 1280px auto;
 
-  background-color: #543a54;
+  background-color: #2cb299;
 
   height: 100vh;
   overflow: hidden;
@@ -57,47 +70,49 @@ header {
   z-index: -4;
 }
 
-.layer, #layer-foreground {
-  background-position: bottom center;
+.layer {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -webkit-crisp-edges;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  background-size: auto;
+  position: fixed;
   background-repeat: no-repeat;
   width: 100%;
   height: 100vh;
 }
 
-.layer {
-  background-size: auto;
-  position: fixed;
+.layer-full {
+  background-repeat: repeat-x;
+  background-size: 1280px auto;
 }
 
-#layer-foreground {
-  background-size: 100vw auto;
-
+.layer-foreground {
   background-image: url("images/Foreground.png");
+  background-position: bottom center;
+
   z-index: -1;
   position: absolute;
 }
 
-#layer-harper {
-  background-image: url("images/Harper.png");
-  background-size: 600px auto;
-  background-position: center 20vh;
-  z-index: -2;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: -webkit-crisp-edges;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
-}
-
-#layer-mountain {
+.layer-mountain {
   background-image: url("images/Mountain.png");
-  background-size: 100vw auto;
+  background-position: bottom center;
+
   z-index: -3;
 }
 
-#layer-logo {
+.layer-moon {
+  background-image: url("images/Moon.png");
+  background-repeat: no-repeat;
+  background-position: 95% 10%;
+  z-index: -5;
+}
+
+.layer-logo {
   background-image: url("images/LunariaLogo.png");
   background-position: center 10%;
-  background-size: auto;
+  background-size: 512px auto;
   z-index: 1;
 
   animation-name: fade-in;
@@ -106,11 +121,55 @@ header {
   animation-fill-mode: both;
 }
 
-#layer-moon {
-  background-image: url("images/Moon.png");
-  background-size: 250px auto;
-  background-position: 95% 10%;
-  z-index: -5;
+.header-character {
+  background-size: 768px auto;
+  z-index: -2;
+}
+
+
+.rione {
+  background-image: url("images/Ria.png");
+  background-position: bottom -20vh left -10%;
+}
+
+.emir {
+  background-image: url("images/Emir.png");
+  background-position: bottom -15vh left 10%;
+}
+
+.sue {
+  background-image: url("images/Sue.png");
+  background-position: bottom -20vh center;
+}
+
+.harper {
+  background-image: url("images/Harper.png");
+  background-position: bottom -20vh left 60%;
+}
+
+.lyra {
+  background-image: url("images/Lyra.png");
+  background-position: bottom -5vh left 100%;
+}
+
+
+.rita, .alice {
+  width: 768px;
+  image-rendering: crisp-edges;
+  position: absolute;
+  top: -300px;
+}
+
+.rita {
+  left: -350px;
+}
+
+.alice {
+  right: -350px;
+}
+
+.center {
+  text-align: center;
 }
 
 header p {
@@ -125,16 +184,6 @@ header p {
   height: 576px;
 }
 
-@media all and (max-width: 1024px) {
-  header
-  {
-    display: none;
-  }
-  #header-mobile
-  {
-    display: block;
-  }
-}
 
 footer {
   height: 6vh;
@@ -142,7 +191,7 @@ footer {
 }
 
 footer p {
-  font-size: 1em;
+  font-size: 2rem;
   padding: 0;
   text-align: center;
 }
@@ -171,7 +220,7 @@ a:visited {
 .button a {
   color: white;
   display: inline-block;
-  font-size: 1.5em;
+  font-size: 1.5rem;
   padding: 8px 40px;
   text-align: center;
 }
@@ -180,23 +229,25 @@ a:visited {
   background-color: #3c8aff;
 }
 
-/*Project section*/
-section > div {
-  background-color: #e5f5f6;
-  list-style-type: none;
-  margin: 2% 0;
-  padding: 2%;
+.container {
+  background-color: #fff7e6;
+  font-size: 2.5rem;
+  color: #543a54;
+  border: 4px solid #fcbea4;
+  box-shadow: 0 0 0 8px #fff7e6, 0 0 0 16px #543a54;
+  padding: 32px;
+  position: relative;
 }
 
-section > div h2 {
-  color: #182c46;
-  font-size: 2.5em;
+.container h2 {
+  font-size: 2.5rem;
   padding: 0 0;
 }
 
-section > div p {
-  color: #182c46;
-  font-size: 1.5em;
+.container ul {
+  margin-top: 10px;
+  margin-bottom: 0;
+  list-style-type: square;
 }
 
 /* Animation */
@@ -209,5 +260,55 @@ section > div p {
   to
   {
     opacity: 1;
+  }
+}
+
+@media all and (max-width: 1024px) {
+  /*
+  header
+  {
+    display: none;
+  }
+  #header-mobile
+  {
+    display: block;
+  }*/
+
+  body {
+    font-size: 24px;
+  }
+
+  section {
+    padding: 64px 20px;
+  }
+
+  .container {
+    font-size: 2rem;
+    padding: 8px 20px;
+  }
+
+  .layer-logo {
+    background-size: 320px auto;
+  }
+
+  header, .layer-full {
+    background-size: 960px auto;
+  }
+
+  .header-character {
+    background-size: 576px auto;
+  }
+
+  .rita, .alice {
+    top: 0;
+    width: 576px;
+  }
+
+  .rita {
+    left: -250px;
+  }
+
+  .alice {
+    right: -250px;
   }
 }
